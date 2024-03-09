@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+/* Current ID: 0x103 */
+message AMSError {
+    bool IMD = 0;
+    bool valid_cell_count = 1; /* If the number of cells found by BMS is equal to expected number of cells */
+    bool is_bms_alive = 2; /* If the bms is reporting / alive */
+    bool is_over_temperature = 3; /* If the temperature of the cells is above the threshold */
+    bool is_warn_temperature = 4; /* If the temperature of the cells is over the warning the threshold */
+    bool is_over_voltage = 5; /* If the voltage of the cells is above the threshold */
+    bool is_under_voltage = 6; /* If the voltage of the cells is below the threshold */
+}
