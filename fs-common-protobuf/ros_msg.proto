@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message can {
+    uint16 id = 1;
+    bool is_rtr = 2;
+    repeated uint8 data = 4;
+}
