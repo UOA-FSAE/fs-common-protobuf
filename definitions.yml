@@ -10,4 +10,4 @@ can:
 messages:
   - ID: 0x103
     can_line: "can3"
-    message: "AMSErrors"
+    message: "AMSError"
