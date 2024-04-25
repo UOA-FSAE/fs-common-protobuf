@@ -11,3 +11,32 @@ messages:
   - ID: 0x103
     can_line: "can3"
     message: "AMSError"
+
+messages:
+  - ID: 0x300
+    can_line: "can3"
+    message: "Ackermann"
+
+# 
+messages:
+  - ID: 0x301
+    can_line: "can3"
+    message: "motionActual"
+
+messages:
+  - ID: 0x500
+    can_line: "can3"
+    message: "DrivingDynamics1"
+
+messages:
+  - ID: 0x501
+    can_line: "can3"
+    message: "DrivingDynamics2"
+    
+messages:
+  - ID: 0x502
+    can_line: "can3"
+    message: "SystemStatus"
+
+
+
