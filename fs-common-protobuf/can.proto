@@ -10,3 +10,4 @@ message AMSError {
     bool is_over_voltage = 6; /* If the voltage of the cells is above the threshold */
     bool is_under_voltage = 7; /* If the voltage of the cells is below the threshold */
 }
+
