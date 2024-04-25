@@ -28,7 +28,7 @@ message CANRAW {
 }
 
 
-/* Orin -> Nano
+/* Orin -> Nano */
 /* Current ID: 0x300 */
 /* size 6 bytes */
 message Ackermann {
@@ -50,19 +50,19 @@ message DrivingDynamics1 {
     uint8 speed_target = 2; /* bit 8-15 */  
     int8 steering_angle_actual = 3; /* bit 16-23 */
     int8 steering_angle_target = 4; /* bit 24-31 */
-    uint8 brake_hydr_actual = 5; /* bit 32-3 */
-    uint8 brake_hydr_target = 6; /* bit 40-4 */
-    int8 motor_moment_actual = 7; /* bit 48-5 */
-    int8 motor_moment_target = 8; /* bit 56-6 */
+    uint8 brake_hydr_actual = 5; /* bit 32-39 */
+    uint8 brake_hydr_target = 6; /* bit 40-47 */
+    int8 motor_moment_actual = 7; /* bit 48-55 */
+    int8 motor_moment_target = 8; /* bit 56-63 */
 
 }
 
 /* Required ID: 0x501 */
 /* size 6 bytes */
 message DrivingDynamics2 {
-    int16 acceleration_longitudinal = 1 /* bit 0-15      1/512 scale*/
-    int16 acceleration_lateral = 2 /* bit 16-31          1/512 scale */
-    int16 yaw_rate = 3 /* bit 32-47                      1/128 scale*/
+    int16 acceleration_longitudinal = 1; /* bit 0-15      1/512 scale */
+    int16 acceleration_lateral = 2; /* bit 16-31          1/512 scale */
+    int16 yaw_rate = 3; /* bit 32-47                      1/128 scale*/
 }
 
 /* Required ID: 0x502 */
