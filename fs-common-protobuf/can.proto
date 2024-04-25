@@ -11,3 +11,102 @@ message AMSError {
     bool is_under_voltage = 7; /* If the voltage of the cells is below the threshold */
 }
 
+
+
+
+/* =============== Go-Kart ================= */	
+
+// TODO below are the specific bit lengths needed on the CAN frame for each	
+// value. Either values need to be shift encoded into a single/two 32 bit ints	
+// or masking on values should be specified.	
+
+/* Orin -> Nano */	
+/* Current ID: 0x300 */	
+/* size 6 bytes */	
+message Ackermann {	
+    int8 speed = 1; /* Desired speed of the car. Must be between 0 and 120 km/h. */	
+    int8 acceleration = 2; /* Desired acceleration. Must be between 0 and 256 m/s^2. */	
+    int8 jerk = 3; /* Desired jerk. Must be between 0 and 1 m/s^3. */	
+    int16 steering_angle = 4; /* Desired steering_angle. Must be between -45 and 45 degrees. */	
+    int8 steering_angle_velocity = 5; /* Desired_angle_velocity. Must be between 0 and 1 radians/s. */	
+}
+	
+
+// double check this is not a duplicate of a sufficient pre-existing can message 
+/* Motec -> Orin	
+/* Current ID: 0x301 */	
+/* size 3 bytes */	
+message motionActual {	
+    int8 velocity = 1;	
+    int16 steering = 2;	
+}	
+
+
+
+//* Data Logging	
+
+/* Required ID: 0x500 */	
+/* size 8 bytes */	
+message DrivingDynamics1 {	
+    uint8 speed_actual = 1; /* bit 0-7 */  	
+    uint8 speed_target = 2; /* bit 8-15 */  	
+    int8 steering_angle_actual = 3; /* bit 16-23 */	
+    int8 steering_angle_target = 4; /* bit 24-31 */	
+    uint8 brake_hydr_actual = 5; /* bit 32-39 */	
+    uint8 brake_hydr_target = 6; /* bit 40-47 */	
+    int8 motor_moment_actual = 7; /* bit 48-55 */	
+    int8 motor_moment_target = 8; /* bit 56-63 */	
+
+}	
+
+/* Required ID: 0x501 */	
+/* size 6 bytes */	
+message DrivingDynamics2 {	
+    int16 acceleration_longitudinal = 1; /* bit 0-15      1/512 scale */	
+    int16 acceleration_lateral = 2; /* bit 16-31          1/512 scale */	
+    int16 yaw_rate = 3; /* bit 32-47                      1/128 scale */	
+}	
+
+/* Required ID: 0x502 */	
+/* size 5 Bytes */	
+message SystemStatus {	
+    AS_State as_state = 1; /* bit 0-2 */	
+    EBS_State ebs_state = 2; /* bit 3-4 */	
+    AMI_State ami_state = 3; /* bit 5-7 */	
+    bool steering_state = 4; /* bit 8 */	
+    Service_Brake_State service_brake_state = 5; /* bit 9-10*/	
+    uint4 lap_counter = 6; /* bit 11-14 */	
+    uint8 Cones_count_actual = 7; /* bit 15-22 */	
+    uint17 Cones_count_all = 8; /* bit 23-39 (17 bits) */	
+}	
+
+enum AS_State {	
+    AS_state_off = 0;	
+    AS_state_ready = 1;	
+    AS_state_driving = 2;	
+    AS_state_emergency_brake = 3;	
+    AS_state_finish = 4;	
+}	
+
+enum EBS_State {	
+    EBS_state_unavailable = 0;	
+    EBS_state_armed = 1;	
+    EBS_state_activated = 2;	
+}	
+
+enum AMI_State {	
+    AMI_state_acceleration = 0;	
+    AMI_state_skidpad = 1;	
+    AMI_state_trackdrive = 2;	
+    AMI_state_braketest = 3;	
+    AMI_state_inspection = 4;	
+    AMI_state_autocross = 5;	
+}	
+
+enum Service_Brake_State {	
+    Steering_state = 0;	
+    Service_brake_state_disengaged = 1;	
+    Service_brake_state_engaged = 2;	
+    Service_brake_state_available = 3;	
+}
+
