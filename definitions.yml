@@ -1,0 +1,13 @@
+---
+can:
+  - name: "can1"
+    baudrate: 1000
+  - name: "can2"
+    baudrate: 1000
+  - name: "can3"
+    baudrate: 250
+
+messages:
+  - ID: 0x103
+    can_line: "can3"
+    message: "AMSError"
