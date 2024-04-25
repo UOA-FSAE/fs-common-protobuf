@@ -1,4 +1,4 @@
-syntax = "proto3";
+proto ros_msg
 
 message can {
     uint16 id = 1;

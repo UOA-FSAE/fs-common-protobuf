@@ -1,4 +1,4 @@
-syntax = "proto3";
+proto can
 
 /* Current ID: 0x103 */
 message AMSError {
@@ -11,18 +11,15 @@ message AMSError {
     bool is_under_voltage = 7; /* If the voltage of the cells is below the threshold */
 }
 
-
-
-
 /* =============== Go-Kart ================= */	
 
 // TODO below are the specific bit lengths needed on the CAN frame for each	
 // value. Either values need to be shift encoded into a single/two 32 bit ints	
 // or masking on values should be specified.	
 
-/* Orin -> Nano */	
-/* Current ID: 0x300 */	
-/* size 6 bytes */	
+/* Orin -> Nano */
+/* Current ID: 0x300 */
+/* size 6 bytes */
 message Ackermann {	
     int8 speed = 1; /* Desired speed of the car. Must be between 0 and 120 km/h. */	
     int8 acceleration = 2; /* Desired acceleration. Must be between 0 and 256 m/s^2. */	
@@ -30,7 +27,6 @@ message Ackermann {
     int16 steering_angle = 4; /* Desired steering_angle. Must be between -45 and 45 degrees. */	
     int8 steering_angle_velocity = 5; /* Desired_angle_velocity. Must be between 0 and 1 radians/s. */	
 }
-	
 
 // double check this is not a duplicate of a sufficient pre-existing can message 
 /* Motec -> Orin	
@@ -39,9 +35,7 @@ message Ackermann {
 message motionActual {	
     int8 velocity = 1;	
     int16 steering = 2;	
-}	
-
-
+}
 
 //* Data Logging	
 
@@ -55,8 +49,7 @@ message DrivingDynamics1 {
     uint8 brake_hydr_actual = 5; /* bit 32-39 */	
     uint8 brake_hydr_target = 6; /* bit 40-47 */	
     int8 motor_moment_actual = 7; /* bit 48-55 */	
-    int8 motor_moment_target = 8; /* bit 56-63 */	
-
+    int8 motor_moment_target = 8; /* bit 56-63 */
 }	
 
 /* Required ID: 0x501 */	
@@ -80,7 +73,7 @@ message SystemStatus {
     uint17 Cones_count_all = 8; /* bit 23-39 (17 bits) */	
 }	
 
-enum AS_State {	
+enum AS_State : uint3 {
     AS_state_off = 0;	
     AS_state_ready = 1;	
     AS_state_driving = 2;	
@@ -88,13 +81,13 @@ enum AS_State {
     AS_state_finish = 4;	
 }	
 
-enum EBS_State {	
+enum EBS_State : uint2 {
     EBS_state_unavailable = 0;	
     EBS_state_armed = 1;	
     EBS_state_activated = 2;	
 }	
 
-enum AMI_State {	
+enum AMI_State : uint3 {
     AMI_state_acceleration = 0;	
     AMI_state_skidpad = 1;	
     AMI_state_trackdrive = 2;	
@@ -103,10 +96,9 @@ enum AMI_State {
     AMI_state_autocross = 5;	
 }	
 
-enum Service_Brake_State {	
+enum Service_Brake_State : uint2 {
     Steering_state = 0;	
     Service_brake_state_disengaged = 1;	
     Service_brake_state_engaged = 2;	
     Service_brake_state_available = 3;	
 }
-
