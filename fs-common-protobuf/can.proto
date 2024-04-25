@@ -26,7 +26,7 @@ message AMSError {
 message Ackermann {	
     int8 speed = 1; /* Desired speed of the car. Must be between 0 and 120 km/h. */	
     int8 acceleration = 2; /* Desired acceleration. Must be between 0 and 256 m/s^2. */	
-    int8 jerk = 3; /* Desired jefk. Must be between 0 and 1 m/s^3. */	
+    int8 jerk = 3; /* Desired jerk. Must be between 0 and 1 m/s^3. */	
     int16 steering_angle = 4; /* Desired steering_angle. Must be between -45 and 45 degrees. */	
     int8 steering_angle_velocity = 5; /* Desired_angle_velocity. Must be between 0 and 1 radians/s. */	
 }
