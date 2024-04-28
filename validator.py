@@ -6,7 +6,7 @@ import yaml
 
 
 def get_all_can_message_names() -> list:
-    with open("fs-common-protobuf/can.proto", "r") as file:
+    with open("fs-common-bitproto/can.bitproto", "r") as file:
         message_names = []
 
         for line in file:
