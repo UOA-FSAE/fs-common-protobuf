@@ -11,6 +11,13 @@ message AMSError {
     bool is_under_voltage = 7; /* If the voltage of the cells is below the threshold */
 }
 
+/* Current ID: 0x101 */
+message RelayState {
+    bool AIR_POS = 6;   /* AIR Positive Relay State. 1 is closed, 0 is open */
+    bool PRECHARGE = 7;   /* Precharge Relay State. 1 is closed, 0 is open */
+    bool AIR_NEG = 8;   /* AIR Negative Relay State. 1 is closed, 0 is open */
+}
+
 /* =============== Go-Kart ================= */	
 
 // TODO below are the specific bit lengths needed on the CAN frame for each	
