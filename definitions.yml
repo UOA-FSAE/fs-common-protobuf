@@ -8,6 +8,9 @@ can:
     baudrate: 250
 
 messages:
+  - ID: 0x101
+    can_line: "can3"
+    message: "RelayState"
   - ID: 0x103
     can_line: "can3"
     message: "AMSError"
