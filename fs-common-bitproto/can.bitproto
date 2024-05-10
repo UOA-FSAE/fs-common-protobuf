@@ -9,6 +9,20 @@ message AMSError {
     bool is_warn_temperature = 5; /* If the temperature of the cells is over the warning the threshold */
     bool is_over_voltage = 6; /* If the voltage of the cells is above the threshold */
     bool is_under_voltage = 7; /* If the voltage of the cells is below the threshold */
+    bool is_ams_shutdown = 8; /* as described */
+    bool is_keepalive_exceeded = 15; /* has the time since last msg exceeded keepalive time */ 
+}
+
+message AMSReady {
+    bool is_ams_not_ready = 8; /* ! not of is_ams_ready */
+}
+
+message StdId_can {
+    uint32_t checksum = 57; /* check sum for given orion message IDs */
+}
+
+message ExtId_can {
+    uiint16_t highest_cell_temperature = 17; /* highest orion thermistor bms temp reported */
 }
 
 /* Current ID: 0x101 */
