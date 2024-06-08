@@ -1,22 +1,60 @@
 proto can
 
+/* =============== AMS ================= */	
+
+/* Current ID: 0x101 */
+message AMSReport {
+    /* Below are AIR Relay Feedback States */
+    bool AIR_POS = 6;   /* AIR Positive Relay State. 1 is closed, 0 is open */
+    bool PRECHARGE = 7;   /* Precharge Relay State. 1 is closed, 0 is open */
+    bool AIR_NEG = 8;   /* AIR Negative Relay State. 1 is closed, 0 is open */
+
+    /* Below are AMS's GPIO state */
+    bool AMS_AUX_GPIO1 = 9;   /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+    bool AMS_AUX_GPIO2 = 10;  /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+    bool AMS_AUX_GPIO3 = 11;  /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+    bool AMS_AUX_GPIO4 = 12;  /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+    bool AMS_AUX_GPIO5 = 13;  /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+    bool AMS_AUX_GPIO6 = 14;  /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+    bool AMS_AUX_GPIO7 = 15;  /* AMS's AUX GPIO 1 state, reserved for future purpose. */
+
+    /* Below is about AMS firmware version*/
+    int8 AMS_firmware_version = 17;  /* Current AMS Firmware's version or equivalent info */
+
+}
+
 /* Current ID: 0x103 */
-message AMSError {
+message ACCReport {
+    /* Below are SHDN report from ACC*/
     bool IMD = 1;   /* Imd fault */
     bool valid_cell_count = 2; /* If the number of cells found by BMS is equal to expected number of cells */
-    bool is_bms_alive = 3; /* If the bms is reporting / alive */
+    bool is_orion_stale = 3; /* If the orion gone stale */
     bool is_over_temperature = 4; /* If the temperature of the cells is above the threshold */
     bool is_warn_temperature = 5; /* If the temperature of the cells is over the warning the threshold */
     bool is_over_voltage = 6; /* If the voltage of the cells is above the threshold */
     bool is_under_voltage = 7; /* If the voltage of the cells is below the threshold */
+    bool is_ams_fault = 8; /* If the AMS caused an AMS SHDN, it is 1, when okay its 0*/
+    bool is_precharge_over_temp = 9; /* It reports AIR_CONTROL_ALI_STM_TMP_FAULT_LATCH's state set bit to be 1 if Fault otherwise 0, AIR_Control has SHDN circuit so do not need to tirgger AMS SHDN*/
+    bool is_bms_alive = 10; /* If the BMS is still alive */
+
+    /* Below are the IMD_STM_MEAS's frequency data, also refer to Bender IMD datasheet in section "Output Measurement" */
+    bool IMD_Normal = 11; /* IMD in normal state, will read 10Hz square wave */
+    bool IMD_UVLO = 12; /* IMD Under Voltage Lock Out, will read 20Hz square wave */
+    bool IMD_error = 13; /* 1 if IMD device reports error, this is device error not insulation fault, will read 40Hz square wave */
+    bool IMD_earth_connection_fault = 14; /* 1 if IMD detected earth conneciton fault, wil lread 50Hz square wave */
+    uint8 IMD_insulation_meas = 17; /* A 0 ~ 100 percentage value that represent the insulation quality measured from IMD. It is measured from IMD_STM_MEAS square_wave's duty cycle in normal_state, the 10Hz square wave */
 }
 
-/* Current ID: 0x101 */
-message RelayState {
-    bool AIR_POS = 6;   /* AIR Positive Relay State. 1 is closed, 0 is open */
-    bool PRECHARGE = 7;   /* Precharge Relay State. 1 is closed, 0 is open */
-    bool AIR_NEG = 8;   /* AIR Negative Relay State. 1 is closed, 0 is open */
+/* Current ID: 0x105 */
+message AMSError {
+    bool precharge_completed = 8;   /* Only send this message with value of 1 at bit 7 once when precharge completed, so rising edge only. */
 }
+
+/* Current ID: 0x106 */
+message AccNotReady{
+    bool acc_not_ready = 8; /* Send this message when the ACC is not ready to enter TS Active mode. */
+}
+
 
 /* =============== Go-Kart ================= */	
 
