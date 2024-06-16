@@ -43,7 +43,7 @@ message ACCReport {
     bool IMD_StartUp = 13; /* IMD in start up fast insulation measure mode, only for first 2 seconds */    
     bool IMD_error = 14; /* 1 if IMD device reports error, this is device error not insulation fault, will read 40Hz square wave */
     bool IMD_earth_connection_fault = 15; /* 1 if IMD detected earth conneciton fault, wil lread 50Hz square wave */
-    uint8 IMD_meas_dutycycle = 17; /* A 0 ~ 100 percentage value that represent the insulation quality measured from IMD. It is measured from IMD_STM_MEAS square_wave's duty cycle in normal_state, the 10Hz square wave */
+    uint8 IMD_meas_dutycycle = 17; /* A 0 ~ 100 percentage value that represent the insulation quality measured from IMD_MEAS. Please send inverted magnitude signal, e.g if measured Duty Cycle is 10%, send 90% */
 }
 
 /* Current ID: 0x105 */
