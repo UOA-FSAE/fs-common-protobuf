@@ -40,9 +40,10 @@ message ACCReport {
     /* Below are the IMD_STM_MEAS's frequency data, also refer to Bender IMD datasheet in section "Output Measurement" */
     bool IMD_Normal = 11; /* IMD in normal state, will read 10Hz square wave */
     bool IMD_UVLO = 12; /* IMD Under Voltage Lock Out, will read 20Hz square wave */
-    bool IMD_error = 13; /* 1 if IMD device reports error, this is device error not insulation fault, will read 40Hz square wave */
-    bool IMD_earth_connection_fault = 14; /* 1 if IMD detected earth conneciton fault, wil lread 50Hz square wave */
-    uint8 IMD_insulation_meas = 17; /* A 0 ~ 100 percentage value that represent the insulation quality measured from IMD. It is measured from IMD_STM_MEAS square_wave's duty cycle in normal_state, the 10Hz square wave */
+    bool IMD_StartUp = 13; /* IMD in start up fast insulation measure mode, only for first 2 seconds */    
+    bool IMD_error = 14; /* 1 if IMD device reports error, this is device error not insulation fault, will read 40Hz square wave */
+    bool IMD_earth_connection_fault = 15; /* 1 if IMD detected earth conneciton fault, wil lread 50Hz square wave */
+    uint8 IMD_meas_dutycycle = 17; /* A 0 ~ 100 percentage value that represent the insulation quality measured from IMD. It is measured from IMD_STM_MEAS square_wave's duty cycle in normal_state, the 10Hz square wave */
 }
 
 /* Current ID: 0x105 */
